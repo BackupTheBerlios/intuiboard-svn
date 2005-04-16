@@ -15,7 +15,7 @@ $conf = array(
 // Database info
 'db_host'			=> 'localhost',
 'db_user'			=> 'intuiboa_dev',
-'db_pass'			=> 'Sk4CHgfkbr'
+'db_pass'			=> 'Sk4CHgfkbr',
 'db_database'		=> 'intuiboa_dev',
 
 );
