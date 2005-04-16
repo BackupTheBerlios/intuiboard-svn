@@ -17,6 +17,9 @@ $conf = array(
 'db_user'			=> 'intuiboa_dev',
 'db_pass'			=> 'Sk4CHgfkbr',
 'db_database'		=> 'intuiboa_dev',
+'db_persistent'		=> 0,
+'db_debug'			=> 1,
+'db_driver'			=> 'mysql',
 
 );
 ?>
