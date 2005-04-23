@@ -62,9 +62,24 @@ $ib_core->db = new database($ib_core);
 // connect the database
 $ib_core->db->connect();
 
-for($i = 0; $i < 1000; $i++) {
-	$random = preg_replace("#[a]{2}#", "abcdefg", "blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaah");
+// heres what we can do
+$acts = array(	
+				'index'			=> array('board'		,'act_board'		, array()),
+				'forum'			=> array('forum'		,'act_forum'		, array()),
+			);
+			
+// what do they want and can they do it?
+if(!isset($ib_core->input['act'])) {
+	$ib_core->input['act'] = 'board';
 }
+elseif(!isset($acts[$ib_core->input['act']])) {
+	$ib_core->input['act'] = 'board';
+}
+
+// do it
+require rootpath."sources/{$pages[$ib_core->input['act']][1]}.php";
+$act = new $act[$ib_core->input['act']][0];
+
 
 // disconnect the database
 $ib_core->db->close();
