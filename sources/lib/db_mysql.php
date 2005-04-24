@@ -26,6 +26,7 @@ class database {
 	
 	// connection, query and debug info
 	var $conn;
+	var $last_result;
 	var $last_query;
 	var $query_count = 0;
 	var $times = array();
@@ -57,16 +58,16 @@ class database {
 		}
 		else {
 			$this->timer->start();
-			$this->conn = @mysql_connect($this->host, $this->user, $this->pass);
+			$this->conn = @mysql_connect($this->host, $this->user, $this->pass, true);
 			$this->times['connect'] = $this->timer->stop();
 		}
 		
 		if(!$this->conn) {
-			die('Error: Could not connect to the database!');
+			$this->_error();
 		}
 		
 		if(!@mysql_select_db($this->database, $this->conn)) {
-			die('Error: Could not select the database!');
+			$this->_error();
 		}
 		
 		return true;
@@ -86,8 +87,38 @@ class database {
 		return true;
 	}
 	
-	function query($query) {
-		return false;
+	function query($query, $unbuf = false) {
+		$this->last_query = $query;
+		$this->query_count++;
+		
+		$this->timer->start();
+		$this->last_result = @mysql_query($query, $this->conn);
+		
+		if(!$this->last_result) {
+			$this->_error();
+		}
+		
+		$this->times['queries'][$this->query_count] = $this->timer->stop();
+		
+		return $this->last_result;
+	}
+	
+	function fetch_row($result = false) {
+		if(!$result) {
+			$result =& $this->last_result;
+		}
+		
+		$this->timer->start();
+		
+		$row = @mysql_fetch_array($result);
+		
+		$this->times['queries'][$this->query_count] += $this->timer->stop();
+		
+		return $row;
+	}
+	
+	function _error() {
+		die(mysql_error($this->conn));
 	}
 }
 ?>

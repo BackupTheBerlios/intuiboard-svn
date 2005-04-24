@@ -1,0 +1,108 @@
+/*
+This CSS is a balls-up
+The skin will be entirely re-written later.
+*/
+
+html,
+body {
+	background: #EEE;
+	margin: 5px;
+	padding: 0px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+a:link,
+a:visited {
+	color: #666666;
+	text-decoration: none;
+}
+
+a:hover,
+a:active {
+	color: #666666;
+	text-decoration: underline;
+}
+
+table,
+tr,
+td {
+	border-collapse: collapse;
+}
+
+#wrapper {
+	width: 760px;
+	margin: 0px auto;
+	padding: 0px;
+	background: #FFF;
+}
+
+#header {
+	border: 1px solid #499;
+	background: #EEE;
+	color: #499;
+	padding: 20px;
+	font-size: 1.6em;
+	margin-bottom: 10px;
+}
+
+#memberbar {
+	background: #EEE;
+	width: 700px;
+	margin: 0px auto 10px auto;
+	padding: 4px;
+}
+
+#body {
+	padding: 4px;
+}
+
+#footer {
+	padding: 4px;
+	margin-top: 10px;
+}
+
+.stats {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 0.6em;
+	text-align: right;
+}
+
+.copyright {
+	margin-top: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 0.8em;
+	text-align: center;
+}
+
+.title {
+	background: #EEE;
+	width: 700px;
+	margin: 5px auto 0px auto;
+	padding: 4px;
+}
+
+.forum_table {
+	background: #FCFCFC;
+	width: 706px;
+	margin: 0px auto;
+	border: 1px solid #EEE;
+}
+
+.tile1 {
+	background: #EFF;
+	color: #999;
+	border: 1px solid #EEE;
+}
+
+.smalltext {
+	font-size: 0.8em;
+}
+
+.blank {
+	color: #CCCCCC;
+	font-style: italic;
+}
+
+.centre {
+	text-align: center;
+}

@@ -29,5 +29,14 @@ class functions {
 		
 		return $input;
 	}
+	
+	function load_skin($skin) {
+		require rootpath. 'cache/skin/skin_'. $skin. '.php';
+		
+		$class = 'skin_'. $skin;
+		$return = new $class($this->ib_core);
+		
+		return $return;
+	}
 }
 ?>
