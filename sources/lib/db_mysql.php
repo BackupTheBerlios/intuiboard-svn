@@ -20,6 +20,7 @@ class database {
 	var $user;
 	var $pass;
 	var $database;
+	var $prefix;
 	var $persistent;
 	var $debug;
 	
@@ -30,19 +31,20 @@ class database {
 	var $times = array();
 	var $debug_html;
 	
-	function database($ib_core, $config = false) {
+	function database(&$ib_core, $config = false) {
 		$this->ib_core =& $ib_core;
 		
 		if(!$config) {
 			$config =& $this->ib_core->conf;
 		}
 		
-		$this->host =& $config['db_host'];
-		$this->user =& $config['db_user'];
-		$this->pass =& $config['db_pass'];
-		$this->database =& $config['db_database'];
-		$this->persistent =& $config['db_persistent'];
-		$this->debug =& $config['db_debug'];
+		$this->host 		=& $config['db_host'];
+		$this->user 		=& $config['db_user'];
+		$this->pass 		=& $config['db_pass'];
+		$this->database 	=& $config['db_database'];
+		$this->prefix 		=& $config['db_prefix'];
+		$this->persistent 	=& $config['db_persistent'];
+		$this->debug 		=& $config['db_debug'];
 		
 		$this->timer = new timer();
 	}
@@ -75,7 +77,7 @@ class database {
 		
 		$this->times['total'] = $this->times['connect'];
 		
-		if($this->times['queries']) {
+		if(isset($this->times['queries'])) {
 			foreach($this->times['queries'] as $time) {
 				$this->times['total'] += $time;
 			}

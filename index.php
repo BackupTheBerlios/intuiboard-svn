@@ -12,10 +12,16 @@
 define('ib', true);
 define('rootpath', './');
 
+// which errors to report?
+error_reporting(E_ALL);
+
 // core class to store globally accessible stuff
 class ib_core {
 	var $conf;
+	
 	var $db;
+	var $func;
+	
 	var $timer;
 	
 	function ib_core($conf_file) {
@@ -55,9 +61,16 @@ $ib_core = new ib_core(rootpath.'ib_config.php');
 $ib_core->timer = new timer();
 $ib_core->timer->start();
 
+// get our standard function library before anything else
+require rootpath.'sources/lib/functions.php';
+$ib_core->func = new functions($ib_core);
+
 // setup the database
-require rootpath.'lib/db_'.$ib_core->conf['db_driver'].'.php';
+require rootpath.'sources/lib/db_'.$ib_core->conf['db_driver'].'.php';
 $ib_core->db = new database($ib_core);
+
+// retrieve user input
+$ib_core->input = $ib_core->func->get_input();
 
 // connect the database
 $ib_core->db->connect();
@@ -66,19 +79,21 @@ $ib_core->db->connect();
 $acts = array(	
 				'index'			=> array('board'		,'act_board'		, array()),
 				'forum'			=> array('forum'		,'act_forum'		, array()),
+				'topic'			=> array('topic'		,'act_topic'		, array()),
+				'login'			=> array('login'		,'act_login'		, array()),
 			);
 			
 // what do they want and can they do it?
 if(!isset($ib_core->input['act'])) {
-	$ib_core->input['act'] = 'board';
+	$ib_core->input['act'] = 'index';
 }
 elseif(!isset($acts[$ib_core->input['act']])) {
-	$ib_core->input['act'] = 'board';
+	$ib_core->input['act'] = 'index';
 }
 
 // do it
-require rootpath."sources/{$pages[$ib_core->input['act']][1]}.php";
-$act = new $act[$ib_core->input['act']][0];
+require rootpath."sources/{$acts[$ib_core->input['act']][1]}.php";
+$act = new $acts[$ib_core->input['act']][0]($ib_core);
 
 
 // disconnect the database

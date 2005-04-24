@@ -6,28 +6,15 @@
 ----------------------------------------
 | Copyright 2005 Michael Corcoran
 ========================================
-| Standard Function Library
+| skin_forum
 ========================================
 */
 
-class functions {
+class skin_forum {
 	var $ib_core;
 	
-	function functions(&$ibcore) {
+	function skin_forum(&$ibcore) {
 		$this->ib_core =& $ibcore;
-	}
-	
-	function get_input() {
-		$input = array();
-		
-		foreach($_GET as $k => $v) {
-			$input[$k] = $v;
-		}
-		foreach($_POST as $k => $v) {
-			$input[$k] = $v;
-		}
-		
-		return $input;
 	}
 }
 ?>
