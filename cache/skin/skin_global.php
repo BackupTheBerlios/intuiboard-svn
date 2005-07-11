@@ -93,7 +93,7 @@ function member_bar_guest() {
 return <<<EOF
 
 <div id="memberbar">
-	Welcome Guest! ( <a href="?act=login">Login</a> | <a href="?act=login&code=register">Register</a> )
+	Welcome Guest! ( <a href="?act=login">Login</a> or <a href="?act=login&code=reg">Register</a> )
 </div>
 
 EOF;
