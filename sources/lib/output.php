@@ -29,20 +29,20 @@ class output {
 		$stats = $this->ib_core->finish();
 		
 		$vars['title'] = $title. ' - Powered by IntuiBoard';
-		$vars['css'] = $this->ib_core->skin->css_cached('cache/css/style.css');
-		$vars['header'] = $this->ib_core->skin->board_header();
-		$vars['footer'] = $this->ib_core->skin->board_footer($stats);
+		$vars['css'] = $this->ib_core->skin['global']->css_cached('cache/css/style.css');
+		$vars['header'] = $this->ib_core->skin['global']->board_header();
+		$vars['footer'] = $this->ib_core->skin['global']->board_footer($stats);
 		$vars['body'] = $this->output;
 		
 		if($this->ib_core->member['m_id']) {
-			$vars['mbar'] = $this->ib_core->skin->member_bar($this->ib_core->member);
+			$vars['mbar'] = $this->ib_core->skin['global']->member_bar($this->ib_core->member);
 		}
 		else {
-			$vars['mbar'] = $this->ib_core->skin->member_bar_guest();
+			$vars['mbar'] = $this->ib_core->skin['global']->member_bar_guest();
 		}
 		
 		
-		$output = $this->ib_core->skin->wrapper($vars);
+		$output = $this->ib_core->skin['global']->wrapper($vars);
 		
 		echo $output;
 	}
