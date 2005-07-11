@@ -29,6 +29,19 @@ td {
 	border-collapse: collapse;
 }
 
+input,
+textarea,
+select,
+fieldset {
+	border: 1px solid #499;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+	border: 1px solid #143F8B;
+}
+
 #wrapper {
 	width: 760px;
 	margin: 0px auto;
