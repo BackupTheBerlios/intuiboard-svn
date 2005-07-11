@@ -19,7 +19,7 @@ class board {
 	function board(&$ibcore) {
 		$this->ib_core =& $ibcore;
 		
-		$this->skin = $this->ib_core->func->load_skin('board');
+		$this->skin = $this->ib_core->load_skin('board');
 		
 		$this->ib_core->input['code'] = isset($this->ib_core->input['code']) ? $this->ib_core->input['code'] : '';
 		
