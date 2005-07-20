@@ -42,12 +42,18 @@ $ib_core->input = $ib_core->get_input();
 // connect the database
 $ib_core->db->connect();
 
+// session
+require_once rootpath.'sources/lib/session.php';
+$ib_core->sess = new lib_session($ib_core);
+$ib_core->sess->load_member();
+
+
 // heres what we can do
 $acts = array(	
 				'index'			=> array('board'		,'act_board'		, array()),
 				'forum'			=> array('forum'		,'act_forum'		, array()),
-				'topic'			=> array('topic'		,'act_topic'		, array()),
-				'login'			=> array('login'		,'act_login'		, array()),
+				'topic'			=> array('topic'		,'act_topic'			, array()),
+				'login'				=> array('login'		,'act_login'			, array()),
 			);
 			
 // what do they want and can they do it?

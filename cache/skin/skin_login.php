@@ -23,7 +23,7 @@ return <<<EOF
 
 <form name="frmLogin" id="frmLogin" method="post" action="./">
 	<input type="hidden" name="act" value="login" />
-	<input type="hidden" name="code" value="doreg" />
+	<input type="hidden" name="code" value="dologin" />
 	<fieldset>
 		<legend>Login</legend>
 		Username:&nbsp;<input type="text" name="username" id="frmUsername" /><br />

@@ -86,7 +86,13 @@ EOF;
 }
 
 function member_bar(&$user) {
+return <<<EOF
 
+<div id="memberbar">
+	Welcome <a href="?act=profile&id={$user['m_id']}">{$user['m_name']}</a>! ( <a href="?act=login&code=logout">Logout</a> )
+</div>
+
+EOF;
 }
 
 function member_bar_guest() {
@@ -94,6 +100,29 @@ return <<<EOF
 
 <div id="memberbar">
 	Welcome Guest! ( <a href="?act=login">Login</a> or <a href="?act=login&code=reg">Register</a> )
+</div>
+
+EOF;
+}
+
+function error($str) {
+return <<<EOF
+
+<div class="error">
+	<h4>Error!</h4>
+	<p>$str</p>
+</div>
+
+EOF;
+}
+
+function redirect($url, $msg) {
+return <<<EOF
+
+
+<div id="redirect">
+	<p>{$msg}Please wait while you are redirected.</p>
+	<p><a href="{$url}">Click here to continue...</a></p>
 </div>
 
 EOF;

@@ -17,8 +17,11 @@ class ib_core {
 	
 	var $db;
 	var $func;
-	var $skin;
 	var $output;
+	
+	var $skin;
+	var $lang;
+	
 	var $nav = array();
 	
 	var $member;
@@ -29,8 +32,6 @@ class ib_core {
 		require $conf_file;
 		
 		$this->conf =& $conf;
-		
-		$this->member = array('m_id' => 0);
 	}
 	
 	function finish() {
@@ -74,7 +75,20 @@ class ib_core {
 		require_once rootpath. 'cache/skin/skin_'. $skin. '.php';
 		
 		$class = 'skin_'. $skin;
-		$this->skin[$skin] = new $class($this->ib_core);
+		$this->skin[$skin] = new $class($this);
+		
+		return true;
+	}
+	
+	function load_lang($lang) {
+		if(isset($this->lang[$lang])) {
+			return false;
+		}
+		
+		require_once rootpath. 'cache/lang/lang_'. $lang. '.php';
+		
+		$var = 'lang_'. $lang;
+		$this->lang[$lang] =& $$var;
 		
 		return true;
 	}
@@ -145,6 +159,73 @@ class ib_core {
 		}
 		
 		return $breadcrumb;
+	}
+	
+	function error($type, $extra = false) {
+		if(!isset($this->lang['error'])) {
+			$this->load_lang('error');
+		}
+		
+		$str = $this->lang['error'][$type];
+		
+		if($extra && count($extra)) {
+			foreach($extra as $var => $val) {
+				$str = str_replace('{'.$var.'}', $val, $str);
+			}
+		}
+		
+		$str = $this->skin['global']->error($str);
+		
+		$this->output->clear_output();
+		$this->output->add_output($str);
+		$this->output->do_output('Test Forums');
+		
+		die();
+	}
+	
+	// Generates password salts
+	// $length: length of the salt required
+	function generate_salt($length = 5) {
+		$salt = '';
+	
+		for($i = 0; $i < $length; $i++) {
+			$salt .= chr(rand(40, 126));
+		}
+		
+		return $salt;
+	}
+	
+	// Generates password hashes
+	// $md5_password: md5 hash of the password to be hashed
+	// $salt: salt to be used, will be generated if not given
+	function generate_pass_hash($md5_password, $salt = false) {
+		if(!$salt) {
+			$salt = $this->generate_salt(5);
+		}
+	
+		$hash = md5(md5($salt).$md5_password);
+		
+		return $hash;
+	}
+	
+	function my_set_cookie($key, $value) {
+		setcookie($key, $value);
+	}
+	
+	function my_unset_cookie($key) {
+		setcookie($key, '', time()-(60*60*24*365));
+	}
+	
+	function redirect($url, $msg = '') {
+		if($msg) {
+			$msg = $this->lang['global'][$msg];
+		}
+		
+		$html = $this->skin['global']->redirect($url, $msg);
+		
+		$this->output->clear_output();
+		$this->output->add_output($html);
+		$this->output->do_output('Test Forums', array('head' => '<meta http-equiv="refresh" content="2; url='.$url.'" />'));
 	}
 }
 

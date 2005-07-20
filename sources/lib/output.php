@@ -23,7 +23,11 @@ class output {
 		$this->output .= $txt;
 	}
 	
-	function do_output($title) {
+	function clear_output() {
+		$this->output = '';
+	}
+	
+	function do_output($title, $options = array()) {
 		$vars = array();
 		
 		$stats = $this->ib_core->finish();
@@ -43,6 +47,14 @@ class output {
 		
 		
 		$output = $this->ib_core->skin['global']->wrapper($vars);
+		
+		if(count($options)) {
+			foreach($options as $var => $val) {
+				$output = str_replace('{'.$var.'}', $val, $output);
+			}
+		}
+		
+		$output = preg_replace("#\{.+?\}#", "", $output);
 		
 		echo $output;
 	}

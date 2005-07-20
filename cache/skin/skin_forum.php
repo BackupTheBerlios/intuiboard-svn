@@ -16,5 +16,18 @@ class skin_forum {
 	function skin_forum(&$ibcore) {
 		$this->ib_core =& $ibcore;
 	}
+	
+function topic_row($topic) {
+return <<<EOF
+
+<div class="topicrow">
+	<h3><a href="?act=topic&id={$topic['t_id']}">{$topic['t_title']}</a></h3>
+	<p>{$topic['t_description']}</p>
+	<p class="detail"><strong>{$topic['t_replies']}</strong> replies</p>
+</div>
+
+EOF;
+}
+
 }
 ?>

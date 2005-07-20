@@ -22,5 +22,7 @@ $conf = array(
 'db_debug'			=> 1,
 'db_driver'			=> 'mysql',
 
+'sess_max_age' 		=> 15,
+
 );
 ?>

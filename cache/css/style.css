@@ -23,12 +23,6 @@ a:active {
 	text-decoration: underline;
 }
 
-table,
-tr,
-td {
-	border-collapse: collapse;
-}
-
 input,
 textarea,
 select,
@@ -87,35 +81,47 @@ select:focus {
 	text-align: center;
 }
 
-.title {
-	background: #EEE;
+div.forumrow {
+	background: #FFFFF0;
+	border-bottom: 1px solid #696969;
+	margin: 0px auto 10px auto;
+	font-family: Helvetica, Arial, Verdana, sans-serif;
 	width: 700px;
-	margin: 5px auto 0px auto;
-	padding: 4px;
 }
 
-.forum_table {
-	background: #FCFCFC;
-	width: 706px;
-	margin: 0px auto;
-	border: 1px solid #EEE;
+div.forumrow h3 {
+	margin-bottom: 0px;
 }
 
-.tile1 {
-	background: #EFF;
-	color: #999;
-	border: 1px solid #EEE;
-}
-
-.smalltext {
-	font-size: 0.8em;
-}
-
-.blank {
-	color: #CCCCCC;
+div.forumrow p {
+	margin: 0px;
 	font-style: italic;
 }
 
-.centre {
-	text-align: center;
+div.forumrow p.detail {
+	background: #FFFFFF;
+	border: 1px solid silver;
+	border-width: 1px 0px;
+	margin: 5px;
+	font-size: 0.8em;
+}
+
+div.error {
+	background: #FFEBCD;
+	border: 1px solid #E9967A;
+	width: 700px;
+	margin: 10px auto;
+}
+
+div.error h4 {
+	background: #FFDEAD;
+	border-bottom: 1px solid #E9967A;
+	margin: 0px;
+	padding: 2px;
+}
+
+div.error p {
+	margin: 0px;
+	font-size: 0.8em;
+	padding: 2px;
 }
