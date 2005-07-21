@@ -12,6 +12,7 @@
 
 class topic {
 	var $ib_core;
+	var $output = '';
 	
 	function topic(&$ibcore) {
 		$this->ib_core =& $ibcore;
