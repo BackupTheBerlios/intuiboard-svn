@@ -19,7 +19,9 @@ class lib_session {
 		$this->ib_core =& $ib_core;
 		
 		session_set_save_handler(array($this, 'cb_open'), array($this, 'cb_close'), array($this, 'cb_read'), array($this, 'cb_write'), array($this, 'cb_destroy'), array($this, 'cb_gc'));
-		session_start();
+		if(!ini_get('session.auto_start')) {
+			session_start();
+		}
 	}
 	
 	function load_member() {

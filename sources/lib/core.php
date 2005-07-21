@@ -234,6 +234,7 @@ class ib_core {
 		$this->output->clear_output();
 		$this->output->add_output($html);
 		$this->output->do_output('Test Forums', array('head' => '<meta http-equiv="refresh" content="2; url='.$url.'" />'));
+		die();
 	}
 	
 	function get_date($time, $format = 'short') {
