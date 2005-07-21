@@ -60,8 +60,8 @@ class board {
 				$row['f_last_poster'] = '<span class="blank">None</span>';
 			}
 			else {
-				$row['f_last_topic'] = '<a href="?act=topic&amp;id='.$row['f_last_topic_id'].'&amp;get=lastpost">'.$row['f_last_topic_title'].'</a>';
-				$row['f_last_poster'] = '<em><a href="?act=member&amp;code=profile&amp;id='.$row['f_last_poster_id'].'">'.$row['f_last_poster_name'].'</a></em>';
+				$row['f_last_topic'] = '<a href="'.$this->ib_core->baseurl.'act=topic&amp;id='.$row['f_last_topic_id'].'&amp;get=lastpost">'.$row['f_last_topic_title'].'</a>';
+				$row['f_last_poster'] = '<em><a href="'.$this->ib_core->baseurl.'act=member&amp;code=profile&amp;id='.$row['f_last_poster_id'].'">'.$row['f_last_poster_name'].'</a></em>';
 			}
 				
 			$this->output .= $this->ib_core->skin['board']->forum_row($row);
