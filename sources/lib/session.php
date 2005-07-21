@@ -22,6 +22,9 @@ class lib_session {
 		if(!ini_get('session.auto_start')) {
 			session_start();
 		}
+		if(ini_get('url_rewriter.tags')) {
+			ini_set('url_rewriter.tags', '');
+		}
 	}
 	
 	function load_member() {
@@ -86,6 +89,9 @@ class lib_session {
 		$this->ib_core->db->query("SELECT * FROM ib_sessions WHERE s_id='".addslashes($id)."'", __FILE__, __LINE__);
 		
 		if(!$this->ib_core->db->num_rows()) {
+			$this->ib_core->db->query("INSERT INTO ib_sessions VALUES('".addslashes($id)."','".addslashes($sess_data)."',".time().",".intval($this->ib_core->member['m_id']).")", __FILE__, __LINE__);
+			$this->sess = array('s_id' => $id, 's_data' => $sess_data, 's_age' => time(), 's_member_id' => intval($this->ib_core->member['m_id']));
+			
 			return '';
 		}
 		
@@ -97,14 +103,8 @@ class lib_session {
 	}
 	
 	function cb_write($id, $sess_data) {
-		if(!isset($this->sess) || ($this->sess['s_id'] != $id)) {
-			$this->ib_core->db->query("INSERT INTO ib_sessions VALUES('".addslashes($id)."','".addslashes($sess_data)."',".time().",".intval($this->ib_core->member['m_id']).")", __FILE__, __LINE__);
-			$this->sess = array('s_id' => $id, 's_data' => $sess_data, 's_age' => time(), 's_member_id' => intval($this->ib_core->member['m_id']));
-		}
-		else {
-			$this->ib_core->db->query("UPDATE ib_sessions SET s_data='".addslashes($sess_data)."',s_age=".time().",s_member_id=".intval($this->ib_core->member['m_id'])." WHERE s_id='".addslashes($id)."'", __FILE__, __LINE__);
-			$this->sess = array('s_id' => $id, 's_data' => $sess_data, 's_age' => time(), 's_member_id' => intval($this->ib_core->member['m_id']));
-		}
+		$this->ib_core->db->query("UPDATE ib_sessions SET s_data='".addslashes($sess_data)."',s_age=".time().",s_member_id=".intval($this->ib_core->member['m_id'])." WHERE s_id='".addslashes($id)."'", __FILE__, __LINE__);
+		$this->sess = array('s_id' => $id, 's_data' => $sess_data, 's_age' => time(), 's_member_id' => intval($this->ib_core->member['m_id']));
 		
 		return true;
 	}
