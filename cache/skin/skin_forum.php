@@ -49,7 +49,7 @@ return <<<EOF
 
 	<tr class="topicrow">
 		<td>
-			<h4><a href="?act=topic&id={$topic['t_id']}">{$topic['t_title']}</a></h4>
+			<h4><a href="?act=topic&amp;id={$topic['t_id']}">{$topic['t_title']}</a></h4>
 			<p>{$topic['t_description']}</p>
 		</td>
 		<td class="centre">{$topic['t_replies']}</td>
