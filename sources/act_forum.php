@@ -56,7 +56,7 @@ class forum {
 		$this->ib_core->nav[] = array($forum['f_name'], '?act=forum&amp;id='.$fid);
 		
 		$this->ib_core->output->add_output($this->output);
-		$this->ib_core->output->do_output('Test Forums');
+		$this->ib_core->output->do_output($forum['f_name']);
 	}
 }
 ?>

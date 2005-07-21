@@ -30,7 +30,7 @@ class board {
 		}
 				
 		$this->ib_core->output->add_output($this->output);
-		$this->ib_core->output->do_output('Test Forums');
+		$this->ib_core->output->do_output($this->ib_core->conf['board_name']);
 	}
 	
 	function _show_index() {

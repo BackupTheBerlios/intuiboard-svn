@@ -32,5 +32,9 @@ $conf = array(
 'show_stats'		=> 1,
 'stats_online_max_age'	=> 15,
 
+'board_name' 		=> 'Development Board',
+'site_name'			=> 'IntuiBoard Home',
+'site_url'			=> 'http://www.intuiboard.com',
+
 );
 ?>

@@ -158,7 +158,7 @@ class ib_core {
 	}
 	
 	function build_breadcrumb() {
-		$breadcrumb = $this->skin['global']->breadcrumb_start('IntuiBoard', './?act=index');
+		$breadcrumb = $this->skin['global']->breadcrumb_start($this->conf['board_name'], $this->baseurl.'act=index');
 		
 		foreach($this->nav as $crumb) {
 			$breadcrumb .= $this->skin['global']->breadcrumb_crumb($crumb[0], $crumb[1]);

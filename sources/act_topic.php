@@ -56,7 +56,7 @@ class topic {
 		$this->ib_core->nav[] = array($topic['t_title'], '?act=topic&amp;id='.$topic['t_id']);
 		
 		$this->ib_core->output->add_output($this->output);
-		$this->ib_core->output->do_output('Test Forums');
+		$this->ib_core->output->do_output($topic['t_title']);
 	}
 }
 ?>
