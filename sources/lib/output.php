@@ -32,11 +32,12 @@ class output {
 		
 		$stats = $this->ib_core->finish();
 		
-		$vars['title'] = $title. ' - Powered by IntuiBoard';
-		$vars['css'] = $this->ib_core->skin['global']->css_cached('cache/css/style.css');
-		$vars['header'] = $this->ib_core->skin['global']->board_header();
-		$vars['footer'] = $this->ib_core->skin['global']->board_footer($stats);
-		$vars['body'] = $this->output;
+		$vars['title'] 	= $title. ' - Powered by IntuiBoard';
+		$vars['css'] 	= $this->ib_core->skin['global']->css_cached('cache/css/style.css');
+		$vars['header'] 	= $this->ib_core->skin['global']->board_header();
+		$vars['footer'] 	= $this->ib_core->skin['global']->board_footer($stats);
+		$vars['body'] 	= $this->output;
+		$vars['nav'] 	= $this->ib_core->build_breadcrumb();
 		
 		if($this->ib_core->member['m_id']) {
 			$vars['mbar'] = $this->ib_core->skin['global']->member_bar($this->ib_core->member);

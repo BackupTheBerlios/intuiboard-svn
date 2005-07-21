@@ -12,7 +12,8 @@
 
 $lang_global = array(
 
-
+'online_users'		=> 'Members Online',
+'board_stats'		=> 'Board Stats',
 
 )
 

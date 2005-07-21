@@ -36,6 +36,9 @@ return <<<EOF
 		</div>
 		<div id="body">
 			{$vars['mbar']}
+			<div id="nav">
+				{$vars['nav']}
+			</div>
 			{$vars['body']}
 		</div>
 		<div id="footer">
@@ -58,9 +61,7 @@ EOF;
 
 function board_header() {
 return <<<EOF
-
-<em>Intui</em>Board
-
+<a href="?act=index"><img src="./cache/images/header.png" alt="IntuiBoard" title="IntuiBoard" /></a>
 EOF;
 }
 
@@ -87,21 +88,17 @@ EOF;
 
 function member_bar(&$user) {
 return <<<EOF
-
 <div id="memberbar">
-	Welcome <a href="?act=profile&id={$user['m_id']}">{$user['m_name']}</a>! ( <a href="?act=login&code=logout">Logout</a> )
-</div>
-
+				Welcome <a href="{$this->ib_core->baseurl}act=member&amp;code=profile&amp;id={$user['m_id']}">{$user['m_name']}</a>! ( <a href="{$this->ib_core->baseurl}act=login&amp;code=logout">Logout</a> )
+			</div>
 EOF;
 }
 
 function member_bar_guest() {
 return <<<EOF
-
 <div id="memberbar">
-	Welcome Guest! ( <a href="?act=login">Login</a> or <a href="?act=login&code=reg">Register</a> )
-</div>
-
+				Welcome Guest! ( <a href="{$this->ib_core->baseurl}act=login">Login</a> or <a href="{$this->ib_core->baseurl}act=login&amp;code=reg">Register</a> )
+			</div>
 EOF;
 }
 
@@ -123,6 +120,30 @@ return <<<EOF
 <div id="redirect">
 	<p>{$msg}Please wait while you are redirected.</p>
 	<p><a href="{$url}">Click here to continue...</a></p>
+</div>
+
+EOF;
+}
+
+function breadcrumb_start($title, $url) {
+return <<<EOF
+<img src="{$this->ib_core->imgurl}nav.png" alt="&raquo;" />&nbsp;<a href="{$url}">{$title}</a>
+EOF;
+}
+
+function breadcrumb_crumb($title, $url) {
+return <<<EOF
+&raquo;<a href="{$url}">{$title}</a>
+EOF;
+}
+
+function online_stats($stats) {
+return <<<EOF
+
+<div class="onlinestats">
+	<h3>{$this->ib_core->lang['global']['board_stats']}</h3>
+	<h4>{$this->ib_core->lang['global']['online_users']}</h4>
+	{$stats['users']}
 </div>
 
 EOF;

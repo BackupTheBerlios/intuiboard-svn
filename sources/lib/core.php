@@ -24,6 +24,9 @@ class ib_core {
 	
 	var $nav = array();
 	
+	var $baseurl = '?';
+	var $imgurl = './cache/images/';
+	
 	var $member;
 	
 	var $timer;
@@ -32,6 +35,9 @@ class ib_core {
 		require $conf_file;
 		
 		$this->conf =& $conf;
+		
+		$this->baseurl = $this->conf['base_url'].'?';
+		$this->imgurl = $this->conf['image_url'];
 	}
 	
 	function finish() {
@@ -176,6 +182,8 @@ class ib_core {
 		
 		$str = $this->skin['global']->error($str);
 		
+		$this->nav = array(array('Error', $this->baseurl));
+		
 		$this->output->clear_output();
 		$this->output->add_output($str);
 		$this->output->do_output('Test Forums');
@@ -226,6 +234,54 @@ class ib_core {
 		$this->output->clear_output();
 		$this->output->add_output($html);
 		$this->output->do_output('Test Forums', array('head' => '<meta http-equiv="refresh" content="2; url='.$url.'" />'));
+	}
+	
+	function get_date($time, $format = 'short') {
+		if($format == 'short') {
+			$diff = time() - $time;
+			
+			if($diff < (60 * 59)) {
+				$diff = ($diff / 60);
+				$diff = round($diff);
+				return $diff.' minutes ago';
+			}
+			else {
+				$tz = isset($this->member['m_tz_offset']) ? intval($this->member['m_tz_offset']) : 0;
+				$tz = ($tz * 60 * 60);
+				$time = ($time + $tz);
+				
+				$now = (time() + $tz);
+				$daydiff = gmdate('j', $now) - gmdate('j', $time);
+				
+				if(($diff < (60 * 60 * 48)) && ($daydiff < 2)) {
+					$timestr = gmdate('g:i a', $time);
+					
+					switch($daydiff) {
+						case 0:
+							$daystr = 'Today';
+							break;
+						case 1:
+							$daystr = 'Yesterday';
+							break;
+					}
+					
+					return $daystr.', '.$timestr;
+				}
+				else {
+					$datestr = gmdate('j M, g:i a', $time);
+					return $datestr;
+				}
+			}
+		}
+		else {
+			$tz = isset($this->member['m_tz_offset']) ? intval($this->member['m_tz_offset']) : 0;
+			$tz = ($tz * 60 * 60);
+			$time = ($time + $tz);
+			
+			$datestr = gmdate('g:i a, jS F Y', $time);
+			
+			return $datestr;
+		}
 	}
 }
 

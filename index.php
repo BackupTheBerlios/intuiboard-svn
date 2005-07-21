@@ -33,8 +33,9 @@ $ib_core->db = new database($ib_core);
 require rootpath.'sources/lib/output.php';
 $ib_core->output = new output($ib_core);
 
-// get the global skin ready
+// get the global skin & lang ready
 $ib_core->load_skin('global');
+$ib_core->load_lang('global');
 
 // retrieve user input
 $ib_core->input = $ib_core->get_input();

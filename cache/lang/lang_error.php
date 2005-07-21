@@ -12,8 +12,9 @@
 
 $lang_error = array(
 
-'invalid_login' => 'The login details you supplied are invalid, please go back and try again',
-'broken_link' => 'This link appears to be broken.',
+'no_perms' 		=> 'You do not have permission to view this page!',
+'invalid_login' 	=> 'The login details you supplied are invalid, please go back and try again',
+'broken_link' 	=> 'This link appears to be broken.',
 
 )
 

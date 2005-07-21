@@ -24,10 +24,7 @@ return <<<EOF
 <div class="forumrow">
 	<h3><a href="?act=forum&id={$forum['f_id']}">{$forum['f_name']}</a></h3>
 	<p>{$forum['f_description']}</p>
-	<p class="detail"><strong>{$forum['f_topics']}</strong> topics, <strong>{$forum['f_replies']}</strong> replies</p>
-	<!--
-	{$forum['f_last_topic']}<br />
-	by: {$forum['f_last_poster']} -->
+	<p class="detail"><strong>{$forum['f_topics']}</strong> topics, <strong>{$forum['f_replies']}</strong> replies; Last post: {$forum['f_last_topic']} by: {$forum['f_last_poster']}</p>
 </div>
 
 EOF;
