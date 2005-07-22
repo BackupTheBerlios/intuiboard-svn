@@ -64,7 +64,7 @@ class board {
 	}
 	
 	function _show_index_forums() {
-		$this->ib_core->db->query("SELECT f.* FROM ib_forums f ORDER BY f.f_order", __FILE__, __LINE__);
+		$this->ib_core->db->query("SELECT * FROM ib_forums ORDER BY f_order", __FILE__, __LINE__);
 		
 		while($row = $this->ib_core->db->fetch_row()) {
 			$perms = unserialize($row['f_perms']);
