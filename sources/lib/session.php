@@ -106,8 +106,8 @@ class lib_session {
 		$this->ib_core->db->query("SELECT * FROM ib_sessions WHERE s_id='".addslashes($id)."'", __FILE__, __LINE__);
 		
 		if(!$this->ib_core->db->num_rows()) {
-			$this->ib_core->db->query("INSERT INTO ib_sessions VALUES('".addslashes($id)."','".addslashes($sess_data)."',".time().",".intval($this->ib_core->member['m_id']).")", __FILE__, __LINE__);
-			$this->sess = array('s_id' => $id, 's_data' => $sess_data, 's_age' => time(), 's_member_id' => intval($this->ib_core->member['m_id']));
+			$this->ib_core->db->query("INSERT INTO ib_sessions VALUES('".addslashes($id)."','',".time().",".intval($this->ib_core->member['m_id']).")", __FILE__, __LINE__);
+			$this->sess = array('s_id' => $id, 's_data' => '', 's_age' => time(), 's_member_id' => intval($this->ib_core->member['m_id']));
 			
 			return '';
 		}
