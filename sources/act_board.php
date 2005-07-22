@@ -127,7 +127,9 @@ class board {
 		$stats['users'] = '';
 		
 		while($row = $this->ib_core->db->fetch_row()) {
-			$stats['users'] .= '<a href="'.$this->ib_core->baseurl.'act=member&amp;code=profile&amp;id='.$row['m_id'].'">'.$row['m_name'].'</a>,';
+			if($row['m_id']) {
+				$stats['users'] .= '<a href="'.$this->ib_core->baseurl.'act=member&amp;code=profile&amp;id='.$row['m_id'].'">'.$row['m_name'].'</a>,';
+			}
 		}
 		
 		$stats['users'] = preg_replace("#,$#", "", $stats['users']);
