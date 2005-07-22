@@ -197,3 +197,25 @@ tr.headerrow h3 {
 td.centre {
 	text-align: center;
 }
+
+table.db_debug {
+	width: 95%;
+	margin: 5px auto 5px auto;
+	border-collapse: collapse;
+}
+
+table.db_debug td {
+	border: 1px solid silver;
+	font-size: 0.8em;
+	padding: 2px;
+}
+
+table.db_debug h4,
+table.db_debug h5 {
+	margin: 0px;
+	font-size: 1.0em;
+}
+
+table.db_debug h5 {
+	display: inline;
+}

@@ -44,7 +44,15 @@ class output {
 		$this->output = '';
 	}
 	
-	function do_output($title, $options = array()) {
+	function do_output($title, $options = array()) {	
+		if(isset($this->ib_core->input['db_debug']) && $this->ib_core->db->debug) {
+			$this->clear_output();
+			$this->add_output($this->ib_core->db->get_debug_html());
+			
+			$this->ib_core->nav[] = array('DB Debuger', '');
+			$title .= ' :DB Debugger';
+		}
+		
 		$vars = array();
 		
 		$stats = $this->ib_core->finish();
@@ -62,7 +70,7 @@ class output {
 		else {
 			$vars['mbar'] = $this->ib_core->skin['global']->member_bar_guest();
 		}
-		
+				
 		
 		$output = $this->ib_core->skin['global']->wrapper($vars);
 		
@@ -73,6 +81,10 @@ class output {
 		}
 		
 		$output = preg_replace("#\{.+?\}#", "", $output);
+		
+		if($this->ib_core->conf['gzip_compress']) {
+			ob_start('ob_gzhandler');
+		}
 		
 		echo $output;
 	}

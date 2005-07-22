@@ -72,8 +72,16 @@ class ib_core {
 			}
 		}
 		
+		$db_queries = $this->db->query_count;
+		
+		if($this->db->debug) {
+			$db_queries = '<a href="'.$this->baseurl.$_SERVER['QUERY_STRING'].'&amp;db_debug">'.$db_queries.'</a>';
+		}
+		
+		$gzip = ($this->conf['gzip_compress']) ? 'On' : 'Off';
+		
 		// how long did we take?
-		$stats = $this->skin['global']->stats(array('exec' => $this->timer->stop(), 'sql' => $this->db->times['total'], 'queries' => $this->db->query_count, 'load' => $load, 'gzip' => 'Off'));
+		$stats = $this->skin['global']->stats(array('exec' => $this->timer->stop(), 'sql' => $this->db->times['total'], 'queries' => $db_queries, 'load' => $load, 'gzip' => $gzip));
 		
 		return $stats;
 	}

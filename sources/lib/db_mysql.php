@@ -49,7 +49,8 @@ class database {
 	var $last_line;
 	var $query_count = 0;
 	var $times = array();
-	var $debug_html;
+	var $debug_queries = array();
+	var $debug_info = '';
 	
 	function database(&$ib_core, $config = false) {
 		$this->ib_core =& $ib_core;
@@ -113,6 +114,7 @@ class database {
 		
 		$this->last_query = $query;
 		$this->query_count++;
+		$this->debug_queries[$this->query_count] = $query;
 		
 		$this->timer->start();
 		if($unbuf) {
@@ -190,6 +192,53 @@ class database {
 	
 	function _error() {
 		die('File: '.$this->last_file.'; Line: '.$this->last_line.'; '.mysql_error($this->conn));
+	}
+	
+	function get_debug_html() {
+		if(!$this->times['connect']) {
+			return '<p>MySQL never connected!</p>';
+		}
+		
+		$html = '';
+		
+		$html .= '<h4>Connection time: '.$this->times['connect'].'</h4>';
+		
+		foreach($this->debug_queries as $id => $query) {
+			$time = $this->times['queries'][$id];
+			
+			if(preg_match("/^SELECT/i", $query)) {
+				$sql = mysql_query("EXPLAIN ".$query, $this->conn);
+				
+				$explain = mysql_fetch_assoc($sql);				
+				$cols = '';
+				$data = '';
+				$gotcols = 0;
+				
+				foreach($explain as $col => $v) {
+					$cols .= '<td><h5>'.$col.'</h5></td>';
+					$data .= '<td>'.htmlspecialchars($v).'&nbsp;</td>';
+					$gotcols++;
+				}
+						
+				$html .= '<table class="db_debug"><tr>';
+				$html .= '<td colspan="'.$gotcols.'"><h4>Select Query</h4></td>';
+				$html .= '</tr><tr><td colspan="'.$gotcols.'">'.htmlspecialchars($query).'</td></tr>';
+				$html .= '<tr>'.$cols.'</tr>';
+					
+				$html .= '<tr class="db_debug_row">'.$data.'</tr>';
+				
+				$html .= '<tr><td colspan="'.$gotcols.'"><h5>mySQL time</h5>: '.$time.'s</td></tr></table>';
+			}
+			else {
+				$html .= '<table class="db_debug">';
+				$html .= '<tr><td colspan="8"><h4>Non Select Query</h4></td></tr>';
+				$html .= '<tr><td colspan="8">'.htmlspecialchars($query).'</td></tr>';
+				$html .= '<tr><td colspan="8"><h5>mySQL time</h5>: '.$time.'s</td></tr>';
+				$html .= '</table>';
+			}
+		}
+		
+		return $html;
 	}
 }
 ?>

@@ -39,6 +39,9 @@ $conf = array(
 'db_debug'			=> 1,
 'db_driver'			=> 'mysql',
 
+'site_name'			=> 'IntuiBoard Home',
+'site_url'			=> 'http://www.intuiboard.com',
+'board_name' 		=> 'Development Board',
 'base_url'			=> 'http://localhost/intuiboard/dev/current/',
 'image_url'			=> 'http://localhost/intuiboard/dev/current/cache/images/',
 'file_ext'			=> 'php',
@@ -49,9 +52,7 @@ $conf = array(
 'show_stats'		=> 1,
 'stats_online_max_age'	=> 15,
 
-'board_name' 		=> 'Development Board',
-'site_name'			=> 'IntuiBoard Home',
-'site_url'			=> 'http://www.intuiboard.com',
+'gzip_compress'		=> 1,
 
 );
 ?>
