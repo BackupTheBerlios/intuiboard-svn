@@ -126,15 +126,22 @@ class board {
 		
 		$stats['users'] = '';
 		
+		$stats['guests'] = 0;
+		$stats['members'] = 0;
+		
 		while($row = $this->ib_core->db->fetch_row()) {
 			if($row['m_id']) {
 				$stats['users'] .= '<a href="'.$this->ib_core->baseurl.'act=member&amp;code=profile&amp;id='.$row['m_id'].'">'.$row['m_name'].'</a>,';
+				$stats['members']++;
+			}
+			else {
+				$stats['guests']++;
 			}
 		}
 		
 		$stats['users'] = preg_replace("#,$#", "", $stats['users']);
 		
-		$this->output .= $this->ib_core->skin['global']->online_stats($stats);
+		$this->output .= $this->ib_core->skin['board']->online_stats($stats);
 	}
 }
 ?>
