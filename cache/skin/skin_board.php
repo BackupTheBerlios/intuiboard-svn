@@ -47,6 +47,19 @@ return <<<EOF
 EOF;
 }
 
+function online_stats($stats) {
+return <<<EOF
+
+<div class="onlinestats">
+	<h3>{$this->ib_core->lang['global']['board_stats']}</h3>
+	<h4>{$this->ib_core->lang['global']['online_users']}</h4>
+	<h5>{$stats['guests']} {$this->ib_core->lang['global']['online_guests']}, {$stats['members']} {$this->ib_core->lang['global']['online_members']}</h5>
+	{$stats['users']}
+</div>
+
+EOF;
+}
+
 
 }
 ?>
