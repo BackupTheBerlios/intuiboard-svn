@@ -29,9 +29,11 @@
 
 $lang_global = array(
 
+'online_members'	=> 'Members',
+'online_guests'	=> 'Guests',
 'logged_out'		=> 'You are now logged out.',
-'logged_in'			=> 'You are now logged in.',
-'online_users'		=> 'Members Online',
+'logged_in'		=> 'You are now logged in.',
+'online_users'		=> 'Users Online',
 'board_stats'		=> 'Board Stats',
 
 )
