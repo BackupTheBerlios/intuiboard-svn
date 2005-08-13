@@ -141,7 +141,12 @@ class board {
 		
 		$stats['users'] = preg_replace("#,$#", "", $stats['users']);
 		
-		$this->output .= $this->ib_core->skin['board']->online_stats($stats);
+		
+		$stats['total_members']	= $this->ib_core->caches['stats']['total_members'];
+		$stats['total_topics']	= $this->ib_core->caches['stats']['total_topics'];
+		$stats['total_replies']	= $this->ib_core->caches['stats']['total_replies'];
+		
+		$this->output .= $this->ib_core->skin['board']->board_stats($stats);
 	}
 }
 ?>

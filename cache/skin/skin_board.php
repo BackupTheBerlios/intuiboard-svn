@@ -47,7 +47,7 @@ return <<<EOF
 EOF;
 }
 
-function online_stats($stats) {
+function board_stats($stats) {
 return <<<EOF
 
 <div class="onlinestats">
@@ -55,6 +55,7 @@ return <<<EOF
 	<h4>{$this->ib_core->lang['global']['online_users']}</h4>
 	<h5>{$stats['guests']} {$this->ib_core->lang['global']['online_guests']}, {$stats['members']} {$this->ib_core->lang['global']['online_members']}</h5>
 	{$stats['users']}
+	<p>{$stats['total_members']} {$this->ib_core->lang['global']['total_members']} {$this->ib_core->lang['global']['stats_contributed']} {$stats['total_topics']} {$this->ib_core->lang['global']['total_topics']} {$this->ib_core->lang['global']['stats_and']} {$stats['total_replies']} {$this->ib_core->lang['global']['total_replies']}.</p>
 </div>
 
 EOF;

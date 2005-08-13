@@ -29,6 +29,11 @@
 
 $lang_global = array(
 
+'stats_and'		=> 'and',
+'stats_contributed'	=> 'have contributed',
+'total_replies'		=> 'replies',
+'total_topics'		=> 'topics',
+'total_members'	=> 'members',
 'online_members'	=> 'Members',
 'online_guests'	=> 'Guests',
 'logged_out'		=> 'You are now logged out.',
