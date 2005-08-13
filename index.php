@@ -68,10 +68,10 @@ $ib_core->sess->load_member();
 
 // heres what we can do
 $acts = array(	
-				'index'			=> array('board'		,'act_board'		, array()),
+				'index'			=> array('board'		,'act_board'		, array('stats')),
 				'forum'			=> array('forum'		,'act_forum'		, array()),
-				'topic'			=> array('topic'		,'act_topic'			, array()),
-				'login'				=> array('login'		,'act_login'			, array()),
+				'topic'			=> array('topic'		,'act_topic'		, array()),
+				'login'			=> array('login'		,'act_login'		, array()),
 			);
 			
 // what do they want and can they do it?
@@ -81,6 +81,9 @@ if(!isset($ib_core->input['act'])) {
 elseif(!isset($acts[$ib_core->input['act']])) {
 	$ib_core->input['act'] = 'index';
 }
+
+// load caches
+$ib_core->load_caches($acts[$ib_core->input['act']][2]);
 
 // do it
 require_once rootpath."sources/{$acts[$ib_core->input['act']][1]}.php";

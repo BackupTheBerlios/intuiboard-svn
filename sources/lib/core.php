@@ -37,6 +37,8 @@ class ib_core {
 	var $func;
 	var $output;
 	
+	var $caches = array();
+	
 	var $skin;
 	var $lang;
 	
@@ -309,6 +311,26 @@ class ib_core {
 			
 			return $datestr;
 		}
+	}
+	
+	function load_caches($caches) {
+		$keys = '';
+		
+		foreach($caches as $key) {
+			$keys .= "'".$key."',";
+		}
+		
+		$keys = preg_replace("#,$#", "", $keys);
+		
+		$query = "SELECT c_key, c_value FROM ib_caches WHERE c_key IN({$keys})";
+		
+		$this->db->query($query, __FILE__, __LINE__);
+		
+		while($row = $this->db->fetch_row()) {
+			$caches[$row['c_key']] = unserialize($row['c_value']);
+		}
+		
+		return true;
 	}
 }
 
