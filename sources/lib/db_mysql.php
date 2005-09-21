@@ -1,20 +1,20 @@
 <?php
 /*
 +----------------------------------------------------------------------------------------
-|  IntuiBoard {$version_str$} ({$version_num$})
-|  http://www.intuiboard.com
+|  Breeze {$version_str$} ({$version_num$})
+|  http://www.breezeboard.com
 +----------------------------------------------------------------------------------------
 |  Revision: $WCREV$
 |  Date: $WCDATE$
 +----------------------------------------------------------------------------------------
 |  Copyright (C) {$copyright_year$} Michael Corcoran
 +----------------------------------------------------------------------------------------
-|  IntuiBoard is free software; you can redistribute it and/or modify
+|  Breeze is free software; you can redistribute it and/or modify
 |  it under the terms of the GNU General Public License as published by
 |  the Free Software Foundation; either version 2 of the License, or
 |  (at your option) any later version.
 |  
-|  IntuiBoard is distributed in the hope that it will be useful,
+|  Breeze is distributed in the hope that it will be useful,
 |  but WITHOUT ANY WARRANTY; without even the implied warranty of
 |  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 |  GNU General Public License for more details.
@@ -27,9 +27,13 @@
 +----------------------------------------------------------------------------------------
 */
 
+if(!defined('breeze')) {
+	die('Error: You may not access this file directly!');
+}
+
 class database {
 	// classes needed
-	var $ib_core;
+	var $breeze;
 	var $timer;
 	
 	// config info
@@ -52,11 +56,11 @@ class database {
 	var $debug_queries = array();
 	var $debug_info = '';
 	
-	function database(&$ib_core, $config = false) {
-		$this->ib_core =& $ib_core;
+	function database(&$breeze, $config = false) {
+		$this->breeze =& $breeze;
 		
 		if(!$config) {
-			$config =& $this->ib_core->conf;
+			$config =& $this->breeze->conf;
 		}
 		
 		$this->host 		=& $config['db_host'];

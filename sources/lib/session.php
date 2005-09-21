@@ -1,20 +1,20 @@
 <?php
 /*
 +----------------------------------------------------------------------------------------
-|  IntuiBoard {$version_str$} ({$version_num$})
-|  http://www.intuiboard.com
+|  Breeze {$version_str$} ({$version_num$})
+|  http://www.breezeboard.com
 +----------------------------------------------------------------------------------------
 |  Revision: $WCREV$
 |  Date: $WCDATE$
 +----------------------------------------------------------------------------------------
 |  Copyright (C) {$copyright_year$} Michael Corcoran
 +----------------------------------------------------------------------------------------
-|  IntuiBoard is free software; you can redistribute it and/or modify
+|  Breeze is free software; you can redistribute it and/or modify
 |  it under the terms of the GNU General Public License as published by
 |  the Free Software Foundation; either version 2 of the License, or
 |  (at your option) any later version.
 |  
-|  IntuiBoard is distributed in the hope that it will be useful,
+|  Breeze is distributed in the hope that it will be useful,
 |  but WITHOUT ANY WARRANTY; without even the implied warranty of
 |  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 |  GNU General Public License for more details.
@@ -27,13 +27,17 @@
 +----------------------------------------------------------------------------------------
 */
 
+if(!defined('breeze')) {
+	die('Error: You may not access this file directly!');
+}
+
 class lib_session {
-	var $ib_core;
+	var $breeze;
 	
 	var $sess;
 	
-	function lib_session(&$ib_core) {
-		$this->ib_core =& $ib_core;
+	function lib_session(&$breeze) {
+		$this->breeze =& $breeze;
 		
 		session_set_save_handler(array($this, 'cb_open'), array($this, 'cb_close'), array($this, 'cb_read'), array($this, 'cb_write'), array($this, 'cb_destroy'), array($this, 'cb_gc'));
 		if(!ini_get('session.auto_start')) {
@@ -45,7 +49,7 @@ class lib_session {
 	}
 	
 	function load_member() {
-		if(!isset($this->ib_core->member)) {
+		if(!isset($this->breeze->member)) {
 			if(isset($_SESSION['m_id']) && isset($_SESSION['m_pass_hash'])) {
 				$m_id = intval($_SESSION['m_id']);
 				$m_pass_hash = $_SESSION['m_pass_hash'];
@@ -60,12 +64,12 @@ class lib_session {
 			}
 			
 			if($m_id) {
-				$this->ib_core->db->query("SELECT m.*,g.*,p.perm_id FROM ib_members m
+				$this->breeze->db->query("SELECT m.*,g.*,p.perm_id FROM ib_members m
 									LEFT JOIN ib_groups g ON(g.g_id=m.m_group)
 									LEFT JOIN ib_perms p ON(p.perm_id=g.g_perms)
 									WHERE m_id=".$m_id, __FILE__, __LINE__);
 									
-				$member = $this->ib_core->db->fetch_row();
+				$member = $this->breeze->db->fetch_row();
 				
 				if($m_pass_hash != $member['m_pass_hash']) {
 					$m_id = 0;
@@ -75,17 +79,17 @@ class lib_session {
 			
 			if(!$m_id) {
 				//guest
-				$this->ib_core->db->query("SELECT g.*,p.perm_id FROM ib_groups g
+				$this->breeze->db->query("SELECT g.*,p.perm_id FROM ib_groups g
 									LEFT JOIN ib_perms p ON(p.perm_id=g.g_perms)
 									WHERE g_id=2", __FILE__, __LINE__);
 									
-				$member = $this->ib_core->db->fetch_row();
+				$member = $this->breeze->db->fetch_row();
 				
 				$member['m_id'] = 0;
 				$member['m_name'] = 'Guest';
 			}
 			
-			$this->ib_core->member =& $member;
+			$this->breeze->member =& $member;
 		}
 	}
 		
@@ -103,16 +107,16 @@ class lib_session {
 			return $this->sess['s_data'];
 		}
 		
-		$this->ib_core->db->query("SELECT * FROM ib_sessions WHERE s_id='".addslashes($id)."'", __FILE__, __LINE__);
+		$this->breeze->db->query("SELECT * FROM ib_sessions WHERE s_id='".addslashes($id)."'", __FILE__, __LINE__);
 		
-		if(!$this->ib_core->db->num_rows()) {
-			$this->ib_core->db->query("INSERT INTO ib_sessions VALUES('".addslashes($id)."','',".time().",".intval($this->ib_core->member['m_id']).")", __FILE__, __LINE__);
-			$this->sess = array('s_id' => $id, 's_data' => '', 's_age' => time(), 's_member_id' => intval($this->ib_core->member['m_id']));
+		if(!$this->breeze->db->num_rows()) {
+			$this->breeze->db->query("INSERT INTO ib_sessions VALUES('".addslashes($id)."','',".time().",".intval($this->breeze->member['m_id']).")", __FILE__, __LINE__);
+			$this->sess = array('s_id' => $id, 's_data' => '', 's_age' => time(), 's_member_id' => intval($this->breeze->member['m_id']));
 			
 			return '';
 		}
 		
-		$row = $this->ib_core->db->fetch_row();
+		$row = $this->breeze->db->fetch_row();
 		
 		$this->sess = $row;
 		
@@ -120,23 +124,23 @@ class lib_session {
 	}
 	
 	function cb_write($id, $sess_data) {
-		$this->ib_core->db->query("UPDATE ib_sessions SET s_data='".addslashes($sess_data)."',s_age=".time().",s_member_id=".intval($this->ib_core->member['m_id'])." WHERE s_id='".addslashes($id)."'", __FILE__, __LINE__);
-		$this->sess = array('s_id' => $id, 's_data' => $sess_data, 's_age' => time(), 's_member_id' => intval($this->ib_core->member['m_id']));
+		$this->breeze->db->query("UPDATE ib_sessions SET s_data='".addslashes($sess_data)."',s_age=".time().",s_member_id=".intval($this->breeze->member['m_id'])." WHERE s_id='".addslashes($id)."'", __FILE__, __LINE__);
+		$this->sess = array('s_id' => $id, 's_data' => $sess_data, 's_age' => time(), 's_member_id' => intval($this->breeze->member['m_id']));
 		
 		return true;
 	}
 	
 	function cb_destroy($id)  {
-		$this->ib_core->db->query("DELETE FROM ib_sessions WHERE s_id='".addslashes($id)."'", __FILE__, __LINE__);
+		$this->breeze->db->query("DELETE FROM ib_sessions WHERE s_id='".addslashes($id)."'", __FILE__, __LINE__);
 		unset($this->sess);
 		
 		return true;
 	}
 	
 	function cb_gc($maxlifetime) {
-		$maxage = time() - ($this->ib_core->conf['sess_max_age']*60);
+		$maxage = time() - ($this->breeze->conf['sess_max_age']*60);
 		
-		$this->ib_core->db->query("DELETE FROM ib_sessions WHERE s_age>".addslashes($maxage), __FILE__, __LINE__);
+		$this->breeze->db->query("DELETE FROM ib_sessions WHERE s_age>".addslashes($maxage), __FILE__, __LINE__);
 		if($this->sess['s_age'] > $maxlifetime) {
 			unset($this->sess);
 		}

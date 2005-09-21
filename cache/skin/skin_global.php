@@ -1,20 +1,20 @@
 <?php
 /*
 +----------------------------------------------------------------------------------------
-|  IntuiBoard {$version_str$} ({$version_num$})
-|  http://www.intuiboard.com
+|  Breeze {$version_str$} ({$version_num$})
+|  http://www.breezeboard.com
 +----------------------------------------------------------------------------------------
 |  Revision: $WCREV$
 |  Date: $WCDATE$
 +----------------------------------------------------------------------------------------
 |  Copyright (C) {$copyright_year$} Michael Corcoran
 +----------------------------------------------------------------------------------------
-|  IntuiBoard is free software; you can redistribute it and/or modify
+|  Breeze is free software; you can redistribute it and/or modify
 |  it under the terms of the GNU General Public License as published by
 |  the Free Software Foundation; either version 2 of the License, or
 |  (at your option) any later version.
 |  
-|  IntuiBoard is distributed in the hope that it will be useful,
+|  Breeze is distributed in the hope that it will be useful,
 |  but WITHOUT ANY WARRANTY; without even the implied warranty of
 |  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 |  GNU General Public License for more details.
@@ -27,11 +27,15 @@
 +----------------------------------------------------------------------------------------
 */
 
+if(!defined('breeze')) {
+	die('Error: You may not access this file directly!');
+}
+
 class skin_global {
-var $ib_core;
+var $breeze;
 	
-function skin_global(&$ibcore) {
-	$this->ib_core =& $ibcore;
+function skin_global(&$breeze) {
+	$this->breeze =& $breeze;
 }
 
 
@@ -87,7 +91,7 @@ return <<<EOF
 
 $stats
 <div class="copyright">
-	<strong><a href="http://www.intuiboard.com">IntuiBoard</a></strong> <em>{$this->ib_core->version}</em> &copy; Copyright 2005 Michael Corcoran
+	<strong><a href="http://www.intuiboard.com">IntuiBoard</a></strong> <em>{$this->breeze->version}</em> &copy; Copyright 2005 Michael Corcoran
 </div>
 
 EOF;
@@ -106,7 +110,7 @@ EOF;
 function member_bar(&$user) {
 return <<<EOF
 <div id="memberbar">
-				Welcome <a href="{$this->ib_core->baseurl}act=member&amp;code=profile&amp;id={$user['m_id']}">{$user['m_name']}</a>! ( <a href="{$this->ib_core->baseurl}act=login&amp;code=logout">Logout</a> )
+				Welcome <a href="{$this->breeze->baseurl}act=member&amp;code=profile&amp;id={$user['m_id']}">{$user['m_name']}</a>! ( <a href="{$this->breeze->baseurl}act=login&amp;code=logout">Logout</a> )
 			</div>
 EOF;
 }
@@ -114,7 +118,7 @@ EOF;
 function member_bar_guest() {
 return <<<EOF
 <div id="memberbar">
-				Welcome Guest! ( <a href="{$this->ib_core->baseurl}act=login">Login</a> or <a href="{$this->ib_core->baseurl}act=login&amp;code=reg">Register</a> )
+				Welcome Guest! ( <a href="{$this->breeze->baseurl}act=login">Login</a> or <a href="{$this->breeze->baseurl}act=login&amp;code=reg">Register</a> )
 			</div>
 EOF;
 }
@@ -144,7 +148,7 @@ EOF;
 
 function breadcrumb_start($title, $url) {
 return <<<EOF
-<img src="{$this->ib_core->imgurl}nav.png" alt="&raquo;" />&nbsp;<a href="{$url}">{$title}</a>
+<img src="{$this->breeze->imgurl}nav.png" alt="&raquo;" />&nbsp;<a href="{$url}">{$title}</a>
 EOF;
 }
 

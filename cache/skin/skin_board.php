@@ -1,20 +1,20 @@
 <?php
 /*
 +----------------------------------------------------------------------------------------
-|  IntuiBoard {$version_str$} ({$version_num$})
-|  http://www.intuiboard.com
+|  Breeze {$version_str$} ({$version_num$})
+|  http://www.breezeboard.com
 +----------------------------------------------------------------------------------------
 |  Revision: $WCREV$
 |  Date: $WCDATE$
 +----------------------------------------------------------------------------------------
 |  Copyright (C) {$copyright_year$} Michael Corcoran
 +----------------------------------------------------------------------------------------
-|  IntuiBoard is free software; you can redistribute it and/or modify
+|  Breeze is free software; you can redistribute it and/or modify
 |  it under the terms of the GNU General Public License as published by
 |  the Free Software Foundation; either version 2 of the License, or
 |  (at your option) any later version.
 |  
-|  IntuiBoard is distributed in the hope that it will be useful,
+|  Breeze is distributed in the hope that it will be useful,
 |  but WITHOUT ANY WARRANTY; without even the implied warranty of
 |  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 |  GNU General Public License for more details.
@@ -27,11 +27,15 @@
 +----------------------------------------------------------------------------------------
 */
 
+if(!defined('breeze')) {
+	die('Error: You may not access this file directly!');
+}
+
 class skin_board {
-var $ib_core;
+var $breeze;
 	
-function skin_board(&$ibcore) {
-	$this->ib_core =& $ibcore;
+function skin_board(&$breeze) {
+	$this->breeze =& $breeze;
 }
 
 
@@ -51,11 +55,11 @@ function board_stats($stats) {
 return <<<EOF
 
 <div class="onlinestats">
-	<h3>{$this->ib_core->lang['global']['board_stats']}</h3>
-	<h4>{$this->ib_core->lang['global']['online_users']}</h4>
-	<h5>{$stats['guests']} {$this->ib_core->lang['global']['online_guests']}, {$stats['members']} {$this->ib_core->lang['global']['online_members']}</h5>
+	<h3>{$this->breeze->lang['global']['board_stats']}</h3>
+	<h4>{$this->breeze->lang['global']['online_users']}</h4>
+	<h5>{$stats['guests']} {$this->breeze->lang['global']['online_guests']}, {$stats['members']} {$this->breeze->lang['global']['online_members']}</h5>
 	{$stats['users']}
-	<p>{$stats['total_members']} {$this->ib_core->lang['global']['total_members']} {$this->ib_core->lang['global']['stats_contributed']} {$stats['total_topics']} {$this->ib_core->lang['global']['total_topics']} {$this->ib_core->lang['global']['stats_and']} {$stats['total_replies']} {$this->ib_core->lang['global']['total_replies']}.</p>
+	<p>{$stats['total_members']} {$this->breeze->lang['global']['total_members']} {$this->breeze->lang['global']['stats_contributed']} {$stats['total_topics']} {$this->breeze->lang['global']['total_topics']} {$this->breeze->lang['global']['stats_and']} {$stats['total_replies']} {$this->breeze->lang['global']['total_replies']}.</p>
 </div>
 
 EOF;
