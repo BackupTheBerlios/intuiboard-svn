@@ -46,6 +46,20 @@ class topic {
 			$this->breeze->error('broken_link');
 		}
 		
+		$get_new = (isset($this->breeze->input['get']) && $this->breeze->input['get'] == 'lastpost') ? true: false;
+		
+		if($get_new) {
+			$this->breeze->db->query("SELECT p.p_id FROM ib_posts p WHERE p.p_topic=".$tid." ORDER BY p_id DESC LIMIT 0,1", __FILE__, __LINE__);
+			$last = $this->breeze->db->fetch_row();
+			
+			if(!$last) {
+				$this->breeze->error('broken_link');
+			}
+			
+			$url = $this->breeze->baseurl.'act=topic&id='.$tid.'#p'.$last['p_id'];
+			$this->breeze->redirect($url, '', 0);
+		}
+		
 		$this->breeze->db->query("SELECT t.*,f.f_name,f.f_perms FROM ib_topics t
 							LEFT JOIN ib_forums f ON(f.f_id=t.t_forum)
 							WHERE t_id=".$tid, __FILE__, __LINE__);

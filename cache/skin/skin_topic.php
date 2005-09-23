@@ -61,7 +61,7 @@ EOF;
 function post_row($post) {
 return <<<EOF
 	
-	<tr class="topicrow">
+	<tr class="topicrow" id="p{$post['p_id']}">
 		<td>
 			<h5><a href="?act=member&amp;code=profile&amp;id={$post['p_author_id']}">{$post['p_author_name']}</a></h5>
 		</td>

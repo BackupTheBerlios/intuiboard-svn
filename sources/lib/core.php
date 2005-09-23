@@ -256,16 +256,22 @@ class breeze {
 		setcookie($key, '', time()-(60*60*24*365));
 	}
 	
-	function redirect($url, $msg = '') {
+	function redirect($url, $msg = '', $wait = 2) {
 		if($msg) {
 			$msg = $this->lang['global'][$msg];
+		}
+		
+		$wait = intval($wait);
+		
+		if(!$wait) {
+			@header("Location: ".$url);
 		}
 		
 		$html = $this->skin['global']->redirect($url, $msg);
 		
 		$this->output->clear_output();
 		$this->output->add_output($html);
-		$this->output->do_output('Test Forums', array('head' => '<meta http-equiv="refresh" content="2; url='.$url.'" />'));
+		$this->output->do_output('Test Forums', array('head' => '<meta http-equiv="refresh" content="'.$wait.'; url='.$url.'" />'));
 		die();
 	}
 	
