@@ -20,7 +20,7 @@
 |  GNU General Public License for more details.
 |  
 |  You should have received a copy of the GNU General Public License
-|  along with IntuiBoard; if not, write to the Free Software
+|  along with Breeze; if not, write to the Free Software
 |  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 +----------------------------------------------------------------------------------------
 |  Skin Template: skin_global
@@ -82,7 +82,7 @@ EOF;
 
 function board_header() {
 return <<<EOF
-<a href="?act=index"><img src="./cache/images/header.png" alt="IntuiBoard" title="IntuiBoard" /></a>
+<a href="?act=index"><img src="./cache/images/header.png" alt="Breeze" title="Breeze" /></a>
 EOF;
 }
 
@@ -91,7 +91,7 @@ return <<<EOF
 
 $stats
 <div class="copyright">
-	<strong><a href="http://www.intuiboard.com">IntuiBoard</a></strong> <em>{$this->breeze->version}</em> &copy; Copyright 2005 Michael Corcoran
+	<strong><a href="http://www.breezeboard.com">Breeze</a></strong> <em>{$this->breeze->version}</em> &copy; Copyright 2005 Michael Corcoran
 </div>
 
 EOF;

@@ -20,7 +20,7 @@
 |  GNU General Public License for more details.
 |  
 |  You should have received a copy of the GNU General Public License
-|  along with IntuiBoard; if not, write to the Free Software
+|  along with Breeze; if not, write to the Free Software
 |  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 +----------------------------------------------------------------------------------------
 |  Output Control
@@ -61,7 +61,7 @@ class output {
 		
 		$stats = $this->breeze->finish();
 		
-		$vars['title'] 	= $title. ' - Powered by IntuiBoard';
+		$vars['title'] 	= $title. ' - Powered by Breeze';
 		$vars['css'] 	= $this->breeze->skin['global']->css_cached('cache/css/style.css');
 		$vars['header'] 	= $this->breeze->skin['global']->board_header();
 		$vars['footer'] 	= $this->breeze->skin['global']->board_footer($stats);
