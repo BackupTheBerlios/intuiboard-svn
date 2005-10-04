@@ -116,6 +116,8 @@ class database {
 		$this->last_file = $file;
 		$this->last_line = $line;
 		
+		$query = str_replace('ib_', $this->prefix, $query);
+		
 		$this->last_query = $query;
 		$this->query_count++;
 		$this->debug_queries[$this->query_count] = $query;
