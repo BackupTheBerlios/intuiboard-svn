@@ -32,7 +32,7 @@ $conf = array(
 // Database info
 'db_host'			=> 'localhost',
 'db_user'			=> 'intuiboa_dev',
-'db_pass'			=> 'Sk4CHgfkbr',
+'db_pass'			=> 'ib',
 'db_database'			=> 'intuiboa_dev',
 'db_prefix'			=> 'ib_',
 'db_persistent'			=> 0,
