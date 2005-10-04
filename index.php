@@ -83,7 +83,12 @@ elseif(!isset($acts[$breeze->input['act']])) {
 }
 
 // load caches
-$breeze->load_caches($acts[$breeze->input['act']][2]);
+$breeze->add_cache('config');
+$breeze->add_cache($acts[$breeze->input['act']][2]);
+$breeze->load_caches();
+
+// load config
+$breeze->load_config_cache();
 
 // do it
 require_once rootpath."sources/{$acts[$breeze->input['act']][1]}.php";

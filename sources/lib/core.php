@@ -41,6 +41,7 @@ class breeze {
 	var $func;
 	var $output;
 	
+	var $load_caches = array();
 	var $caches = array();
 	
 	var $skin;
@@ -59,9 +60,7 @@ class breeze {
 		require $conf_file;
 		
 		$this->conf =& $conf;
-		
-		$this->baseurl = $this->conf['base_url'].'?';
-		$this->imgurl = $this->conf['image_url'];
+		unset($conf);
 	}
 	
 	function finish() {
@@ -323,11 +322,11 @@ class breeze {
 		}
 	}
 	
-	function load_caches($caches) {
-		if(count($caches)) {
+	function load_caches() {
+		if(count($this->load_caches)) {
 			$keys = '';
 			
-			foreach($caches as $key) {
+			foreach($this->load_caches as $key) {
 				$keys .= "'".$key."',";
 			}
 			
@@ -346,6 +345,34 @@ class breeze {
 		else {
 			return false;
 		}
+	}
+	
+	function add_cache($cache) {
+		if(is_array($cache)) {
+			foreach($cache as $t) {
+				$this->load_caches[] = $t;
+			}
+		}
+		else {
+			$this->load_caches[] = $cache;
+		}
+		
+		return true;
+	}
+	
+	function load_config_cache() {
+		if(empty($this->caches['config'])) {
+			return false;
+		}
+		
+		foreach($this->caches['config'] as $k => $v) {
+			$this->conf[$k] = $v;
+		}
+		
+		$this->baseurl = $this->conf['base_url'].'?';
+		$this->imgurl = $this->conf['image_url'];
+		
+		return true;
 	}
 }
 
