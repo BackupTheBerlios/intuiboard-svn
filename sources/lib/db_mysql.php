@@ -144,7 +144,7 @@ class database {
 		
 		$this->timer->start();
 		
-		$row = @mysql_fetch_array($result);
+		$row = @mysql_fetch_assoc($result);
 		
 		$this->times['queries'][$this->query_count] += $this->timer->stop();
 		
