@@ -101,8 +101,8 @@ class login {
 			$_SESSION['m_pass_hash'] = $row['m_pass_hash'];
 			
 			if($clean_input['remember']) {
-				$this->breeze->my_set_cookie('m_id', $row['m_id']);
-				$this->breeze->my_set_cookie('m_pass_hash', $row['m_pass_hash']);
+				$this->breeze->my_set_cookie('m_id', $row['m_id'], (60*60*24*730));
+				$this->breeze->my_set_cookie('m_pass_hash', $row['m_pass_hash'], (60*60*24*730));
 			}
 			
 			$this->breeze->redirect('?act=index', 'logged_in');
