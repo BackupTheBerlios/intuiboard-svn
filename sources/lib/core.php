@@ -247,8 +247,19 @@ class breeze {
 		return $hash;
 	}
 	
-	function my_set_cookie($key, $value) {
-		setcookie($key, $value);
+	function my_set_cookie($key, $value, $expire = '') {
+		if($expire) {
+			$expire = intval($expire);
+			
+			if($expire < 1000000000) {
+				$expire += time();
+			}
+			
+			setcookie($key, $value, $expire);
+		}
+		else {
+			setcookie($key, $value);
+		}
 	}
 	
 	function my_unset_cookie($key) {
