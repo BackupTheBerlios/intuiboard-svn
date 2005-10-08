@@ -78,7 +78,10 @@ $acts = array(
 if(!isset($breeze->input['act'])) {
 	$breeze->input['act'] = 'index';
 }
-elseif(!isset($acts[$breeze->input['act']])) {
+
+$breeze->input['act'] = strtolower($breeze->input['act']);
+
+if(!isset($acts[$breeze->input['act']])) {
 	$breeze->input['act'] = 'index';
 }
 
