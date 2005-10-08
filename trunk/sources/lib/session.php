@@ -118,7 +118,8 @@ class lib_session {
 							, __FILE__, __LINE__);
 		}
 		else {
-			$this->breeze->db->query("UPDATE ib_sessions SET s_age=".time().",s_act='".$act."',s_extra='".$extra."' 
+			$this->breeze->db->query("UPDATE ib_sessions SET s_age=".time().",s_act='".$act."',s_extra='".$extra."',
+							s_member_id=".$this->breeze->member['m_id']."
 							WHERE s_id='".addslashes($this->sess)."' AND s_ip='".$ip."'"
 							, __FILE__, __LINE__);
 		}
