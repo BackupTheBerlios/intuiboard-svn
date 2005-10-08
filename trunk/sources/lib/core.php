@@ -247,6 +247,14 @@ class breeze {
 		return $hash;
 	}
 	
+	function my_get_cookie($key) {
+		if(!isset($_COOKIE[$key])) {
+			return false;
+		}
+		
+		return $_COOKIE[$key];
+	}
+	
 	function my_set_cookie($key, $value, $expire = '') {
 		if($expire) {
 			$expire = intval($expire);

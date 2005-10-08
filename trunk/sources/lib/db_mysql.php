@@ -144,11 +144,7 @@ class database {
 			$result =& $this->last_result;
 		}
 		
-		$this->timer->start();
-		
 		$row = @mysql_fetch_assoc($result);
-		
-		$this->times['queries'][$this->query_count] += $this->timer->stop();
 		
 		return $row;
 	}
@@ -197,7 +193,7 @@ class database {
 	}
 	
 	function _error() {
-		die('File: '.$this->last_file.'; Line: '.$this->last_line.'; '.mysql_error($this->conn));
+		die('File: '.$this->last_file.'; Line: '.$this->last_line.'; Query: <pre>'.$this->last_query.'</pre> SQL Error:'.mysql_error($this->conn));
 	}
 	
 	function get_debug_html() {
