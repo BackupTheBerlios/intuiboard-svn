@@ -135,7 +135,10 @@ class board {
 		
 		while($row = $this->breeze->db->fetch_row()) {
 			if($row['m_id']) {
-				$stats['users'] .= '<a href="'.$this->breeze->baseurl.'act=member&amp;code=profile&amp;id='.$row['m_id'].'">'.$row['m_name'].'</a>,';
+				$title = $this->breeze->get_date($row['s_age']);
+				
+				$stats['users'] .= '<a href="'.$this->breeze->baseurl.'act=member&amp;code=profile&amp;id='.$row['m_id'].'" title="'.$title.'">'.
+							$row['m_name'].'</a>,';
 				$stats['members']++;
 			}
 			else {
